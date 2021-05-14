@@ -43,7 +43,7 @@ namespace Phonebook
             contactControl.PrepareUI(editorType);
         }
 
-        public Contact Contact { get; set; } = new Contact();
+        public Employee Contact { get; set; } = new Employee();
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {

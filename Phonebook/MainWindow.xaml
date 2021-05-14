@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Phonebook"
         xmlns:Controls="clr-namespace:Phonebook.Controls;assembly=Phonebook.Controls" x:Class="Phonebook.MainWindow"
         mc:Ignorable="d"
-        Title="Телефонный справочник" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Title="База сотрудников" Height="450" Width="800" WindowStartupLocation="CenterScreen"
     
     
         xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -19,11 +19,11 @@
     </Window.Resources>
     <Grid>
 
-        <ListView x:Name="phonebookListView" Margin="10,10,488,10.5" SelectionMode="Single" SelectionChanged="phonebookListView_SelectionChanged">
+        <ListView x:Name="databaseListView" Margin="10,10,488,10.5" SelectionMode="Single" SelectionChanged="databaseListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="100" Header="Номер телефона" DisplayMemberBinding="{Binding Phone}"/>
-                    <GridViewColumn Width="auto" Header="ФИО" DisplayMemberBinding="{Binding FIO}"/>
+                    <GridViewColumn Width="100" Header="Департамент" DisplayMemberBinding="{Binding Category}"/>
+                    <GridViewColumn Width="auto" Header="ФИО Сотдрутника" DisplayMemberBinding="{Binding FIO}"/>
                 </GridView>
             </ListView.View>
         </ListView>

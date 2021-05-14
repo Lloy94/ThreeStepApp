@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Phonebook"
         xmlns:Controls="clr-namespace:Phonebook.Controls;assembly=Phonebook.Controls" x:Class="Phonebook.ContactEditor"
         mc:Ignorable="d"
-        Title="Контакт" Height="300" Width="400" WindowStartupLocation="CenterScreen" MinWidth="400" MaxWidth="400" MaxHeight="300" MinHeight="300" ResizeMode="NoResize">
+        Title="Сотрудник" Height="300" Width="400" WindowStartupLocation="CenterScreen" MinWidth="400" MaxWidth="400" MaxHeight="300" MinHeight="300" ResizeMode="NoResize">
     <Grid>
 
         <Controls:ContactControl x:Name="contactControl" Height="203" Margin="10,10,9.5,0" VerticalAlignment="Top"/>

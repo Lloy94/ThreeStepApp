@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook", "Phonebook\Phonebook.csproj", "{F6B4D830-962A-408C-83EE-B512E1DABE6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Phonebook\Database.csproj", "{F6B4D830-962A-408C-83EE-B512E1DABE6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.Controls", "Phonebook.Controls\Phonebook.Controls.csproj", "{C75DE69E-778F-410B-94B9-99F7B5218127}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Controls", "Phonebook.Controls\Database.Controls.csproj", "{C75DE69E-778F-410B-94B9-99F7B5218127}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.Data", "Phonebook.Data\Phonebook.Data.csproj", "{2D2F2955-A410-47BE-84C0-BA08A600133A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Data", "Phonebook.Data\Database.Data.csproj", "{2D2F2955-A410-47BE-84C0-BA08A600133A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

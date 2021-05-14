@@ -9,7 +9,7 @@ namespace Phonebook.Data
     /// <summary>
     /// Контакт
     /// </summary>
-    public class Contact
+    public class Employee
     {
         /// <summary>
         /// Номер телефона
@@ -24,53 +24,48 @@ namespace Phonebook.Data
         /// <summary>
         /// Фамилия
         /// </summary>
-        public string LastName { get; set; }
+        public string SecondName { get; set; }
 
         /// <summary>
         /// Отчество
         /// </summary>
-        public string SecondName { get; set; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// Комментарий
         /// </summary>
         public string Comment { get; set; }
 
-        /// <summary>
-        /// Блокировка
-        /// </summary>
-        public Boolean Locked { get; set; }
 
         /// <summary>
         /// Категория
         /// </summary>
-        public ContactCategory Category { get; set; } = ContactCategory.General;
+        public Department Category { get; set; } = Department.IT;
 
         public string FIO
         {
-            get { return $"{LastName} {FirstName} {LastName}"; }
+            get { return $"{LastName} {FirstName} {SecondName}"; }
         }
 
         #region Constructors
 
-        public Contact() { }
+        public Employee() { }
 
-        public Contact(string phone, string firstName, string lastName, string secondName)
+        public Employee(Department category, string firstName, string secondName, string lastName)
         {
-            Phone = phone;
+            Category = category;
             FirstName = firstName;
             LastName = lastName;
             SecondName = secondName;
         }
 
-        public Contact(string phone, string firstName, string lastName, string secondName, bool locked, ContactCategory category)
+        public Employee(string phone, string firstName, string secondName, string lastName, Department category)
         {
             Phone = phone;
             FirstName = firstName;
             LastName = lastName;
             SecondName = secondName;
 
-            Locked = locked;
             Category = category;
         }
 
@@ -78,7 +73,7 @@ namespace Phonebook.Data
 
         public override string ToString()
         {
-            return $"{Phone} - {LastName} {FirstName} {LastName}";
+            return $"{Category} - {SecondName} {FirstName} {LastName}";
         }
 
     }

@@ -27,8 +27,8 @@
             </TextBox.Style>
         </TextBox>
         <Label x:Name="label1_Copy" Content="Номер телефона:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="cbLocked" Content="Контакт заблокирован" HorizontalAlignment="Left" Margin="120,183,0,0" VerticalAlignment="Top" TabIndex="5"/>
-        <ComboBox x:Name="cbCatagory" Margin="120,41,0,0" VerticalAlignment="Top" TabIndex="1"/>
+        <ComboBox x:Name="cbCatagory"  Margin="120,41,0,0" VerticalAlignment="Top" TabIndex="1"/>
         <TextBox x:Name="tbComment" Margin="0,210,0,0" TextWrapping="Wrap" TabIndex="6" Height="90" VerticalAlignment="Top"/>
+        <Label x:Name="label5" Content="Департамент" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

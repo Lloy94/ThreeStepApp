@@ -21,26 +21,26 @@ namespace Phonebook
     /// </summary>
     public partial class MainWindow : Window
     {
-        private PhonebookDatabase database = new PhonebookDatabase();
+        private DatabaseDatabase database = new DatabaseDatabase();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            phonebookListView.ItemsSource = database.Contacts;
+            databaseListView.ItemsSource = database.Contacts;
         }
 
-        private void phonebookListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void databaseListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count != 0)
             {
-                contactControl.SetContact(e.AddedItems[0] as Contact);
+                contactControl.SetContact(e.AddedItems[0] as Employee);
             }
         }
 
         private void btnApply_Click(object sender, RoutedEventArgs e)
         {
-            if (phonebookListView.SelectedItems.Count < 1)
+            if (databaseListView.SelectedItems.Count < 1)
                 return;
 
             contactControl.UpdateContact();
@@ -59,18 +59,18 @@ namespace Phonebook
 
         private void UpdateBinding()
         {
-            phonebookListView.ItemsSource = null;
-            phonebookListView.ItemsSource = database.Contacts;
+            databaseListView.ItemsSource = null;
+            databaseListView.ItemsSource = database.Contacts;
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            if (phonebookListView.SelectedItems.Count < 1)
+            if (databaseListView.SelectedItems.Count < 1)
                 return;
 
-            if (MessageBox.Show("Вы действительно желаете удалить контакт?", "Удаление контакта", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Вы действительно желаете удалить Сотрудника?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                database.Contacts.Remove((Contact)phonebookListView.SelectedItems[0]);
+                database.Contacts.Remove((Employee)databaseListView.SelectedItems[0]);
                 UpdateBinding();
             }
         }

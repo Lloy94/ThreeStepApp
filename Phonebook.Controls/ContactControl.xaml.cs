@@ -19,13 +19,13 @@ namespace Phonebook.Controls
     public partial class ContactControl : UserControl
     {
 
-        private Contact contact;
+        private Employee contact;
 
         public ContactControl()
         {
             InitializeComponent();
 
-            cbCatagory.ItemsSource = Enum.GetValues(typeof(ContactCategory)).Cast<ContactCategory>();
+            cbCatagory.ItemsSource = Enum.GetValues(typeof(Department)).Cast<Department>();
         }
 
         public void PrepareUI(EditorType editorType)
@@ -41,27 +41,25 @@ namespace Phonebook.Controls
             }
         }
 
-        public void SetContact(Contact contact)
+        public void SetContact(Employee contact)
         {
             this.contact = contact;
             tbPhone.Text = contact.Phone;
             tbFirstName.Text = contact.FirstName;
             tbLastName.Text = contact.LastName;
             tbSecondName.Text = contact.SecondName;
-            cbLocked.IsChecked = contact.Locked;
             cbCatagory.SelectedItem = contact.Category;
             tbComment.Text = contact.Comment;
 
         }
 
-        public Contact UpdateContact()
+        public Employee UpdateContact()
         {
             contact.Phone = tbPhone.Text;
             contact.FirstName = tbFirstName.Text;
             contact.LastName = tbLastName.Text;
             contact.SecondName = tbSecondName.Text;
-            contact.Locked = (bool)cbLocked.IsChecked;
-            contact.Category = (ContactCategory)cbCatagory.SelectedItem;
+            contact.Category = (Department)cbCatagory.SelectedItem;
             contact.Comment = tbComment.Text;
 
             return contact;
