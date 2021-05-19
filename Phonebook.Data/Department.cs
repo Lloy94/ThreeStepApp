@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Phonebook.Data
 {
-    public enum ContactCategory
+    public enum Department
     {
-        General = 0,
-        Personal = 1,
-        Working = 2,
+        IT = 0,
+        Склад = 1,
+        Охрана = 2,
+        Бухгалтерия = 3,
+        Управление =4
     }
 }
