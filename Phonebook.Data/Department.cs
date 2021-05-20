@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace Phonebook.Data
 {
-    public enum Department
+    public class Department
     {
-        IT = 0,
-        Склад = 1,
-        Охрана = 2,
-        Бухгалтерия = 3,
-        Управление =4
+        public Department() { }
+
+        public string DepartmentName { get; set; }
+        public int Id { get; set; }
+        public Department(int id, string departmentName)
+        {
+            Id = id;
+            DepartmentName = departmentName;
+            
+        }
     }
 }

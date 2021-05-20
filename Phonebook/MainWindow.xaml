@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Phonebook"
-        xmlns:Controls="clr-namespace:Phonebook.Controls;assembly=Phonebook.Controls" x:Class="Phonebook.MainWindow"
+        x:Class="Phonebook.MainWindow"
+        xmlns:Controls="clr-namespace:Phonebook.Controls;assembly=Phonebook.Controls"
         mc:Ignorable="d"
         Title="База сотрудников" Height="450" Width="800" WindowStartupLocation="CenterScreen"
     
@@ -19,11 +20,13 @@
     </Window.Resources>
     <Grid>
 
-        <ListView x:Name="databaseListView" Margin="10,10,488,10.5" SelectionMode="Single" SelectionChanged="databaseListView_SelectionChanged">
+        <ListView ItemsSource="{Binding ContactList}" SelectedItem="{Binding SelectedContact}" x:Name="databaseListView" Margin="10,10,488,10.5" SelectionMode="Single" SelectionChanged="databaseListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="100" Header="Департамент" DisplayMemberBinding="{Binding Category}"/>
-                    <GridViewColumn Width="auto" Header="ФИО Сотдрутника" DisplayMemberBinding="{Binding FIO}"/>
+                    <GridViewColumn Width="100" Header="Департамент" DisplayMemberBinding="{Binding Category.DepartmentName}"/>
+                    <GridViewColumn Width="auto" Header="Фамилия" DisplayMemberBinding="{Binding SecondName}"/>
+                    <GridViewColumn Width="auto" Header="Имя" DisplayMemberBinding="{Binding FirstName}"/>
+                    <GridViewColumn Width="auto" Header="Отчество" DisplayMemberBinding="{Binding LastName}"/>
                 </GridView>
             </ListView.View>
         </ListView>
