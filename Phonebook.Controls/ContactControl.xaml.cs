@@ -33,17 +33,10 @@ namespace Phonebook.Controls
                 NotifyPropertyChanged();
             }
         }
-
-        public ObservableCollection<Department> Departments { get; set; } = new ObservableCollection<Department>();
+        public ObservableCollection<Department> Departments { get; set; }= Department.Departments;
         public ContactControl()
-        {
-            Departments.Add(new Department(0, "IT"));
-            Departments.Add(new Department(1, "Склад"));
-            Departments.Add(new Department(2, "Охрана"));
-            Departments.Add(new Department(3, "Бухгалтерия"));
-            Departments.Add(new Department(4, "Управление"));
+        {         
             InitializeComponent();
-
             this.DataContext = this;
 
         }
@@ -61,29 +54,9 @@ namespace Phonebook.Controls
             }
         }
 
-        /*public void SetContact(Employee contact)
-        {
-            this.contact = contact;
-            tbPhone.Text = contact.Phone;
-            tbFirstName.Text = contact.FirstName;
-            tbLastName.Text = contact.LastName;
-            tbSecondName.Text = contact.SecondName;
-            cbCatagory.SelectedItem = contact._department;
-            tbComment.Text = contact.Comment;
 
-        }
+        
 
-        public Employee UpdateContact()
-        {
-            contact.Phone = tbPhone.Text;
-            contact.FirstName = tbFirstName.Text;
-            contact.LastName = tbLastName.Text;
-            contact.SecondName = tbSecondName.Text;
-            contact.Category.Category = (string)cbCatagory.SelectedItem;
-            contact.Comment = tbComment.Text;
-
-            return contact;
-        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
 

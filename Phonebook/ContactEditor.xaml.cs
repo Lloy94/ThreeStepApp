@@ -17,7 +17,9 @@ namespace Phonebook
             InitializeComponent();
 
             editorType = EditorType.Add;
+            Contact.Category = Department.Departments[0];
             contactControl.Contact = Contact;
+            contactControl.Contact.Category = (Department)Contact.Category.Clone();
             PrepareUI();
         }
 
@@ -26,7 +28,9 @@ namespace Phonebook
             InitializeComponent();
 
             this.editorType = editorType;
+            Contact.Category = Department.Departments[0];
             contactControl.Contact = Contact;
+            contactControl.Contact.Category = (Department)Contact.Category.Clone();
             PrepareUI();
         }
 

@@ -39,6 +39,7 @@ namespace Phonebook
             if (e.AddedItems.Count != 0)
             {
                 contactControl.Contact = (Employee)SelectedContact.Clone();
+                contactControl.Contact.Category = (Department)SelectedContact.Category.Clone();               
             }
         }
 
@@ -46,8 +47,11 @@ namespace Phonebook
         {
             if (databaseListView.SelectedItems.Count < 1)
                 return;
-
-            ContactList[ContactList.IndexOf(SelectedContact)] = contactControl.Contact;
+            if (database.Update(contactControl.Contact) > 0)
+            {
+                ContactList[ContactList.IndexOf(SelectedContact)].Category = contactControl.Contact.Category;
+                ContactList[ContactList.IndexOf(SelectedContact)] = contactControl.Contact;
+            }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -55,7 +59,8 @@ namespace Phonebook
             ContactEditor editor = new ContactEditor();
             if (editor.ShowDialog() == true)
             {
-                database.Contacts.Add(editor.Contact);
+                if (database.Add(editor.Contact) > 0)
+                    MessageBox.Show("Запись успешно добавлена", "Добавление записи", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -68,7 +73,8 @@ namespace Phonebook
 
             if (MessageBox.Show("Вы действительно желаете удалить Сотрудника?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                database.Contacts.Remove((Employee)databaseListView.SelectedItems[0]);
+                if (database.Remove((Employee)databaseListView.SelectedItems[0]) > 0)
+                    MessageBox.Show("Запись успешно удалена", "Удаление записи", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
