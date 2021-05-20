@@ -1,4 +1,5 @@
 ﻿using Phonebook.Data;
+using Phonebook.Controls;
 using System.Windows;
 
 namespace Phonebook
@@ -16,7 +17,7 @@ namespace Phonebook
             InitializeComponent();
 
             editorType = EditorType.Add;
-            contactControl.SetContact(Contact);
+            contactControl.Contact = Contact;
             PrepareUI();
         }
 
@@ -25,7 +26,7 @@ namespace Phonebook
             InitializeComponent();
 
             this.editorType = editorType;
-            contactControl.SetContact(Contact);
+            contactControl.Contact = Contact;
             PrepareUI();
         }
 
@@ -47,7 +48,6 @@ namespace Phonebook
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            contactControl.UpdateContact();
             DialogResult = true;
         }
 
