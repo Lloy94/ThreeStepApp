@@ -52,8 +52,10 @@ namespace Phonebook
             if (databaseListView.SelectedItems.Count < 1)
                 return;
             if (database.Update(contactControl.Contact) > 0)
-            {                
+            {
+                int temp = ContactList.IndexOf(SelectedContact);
                 ContactList[ContactList.IndexOf(SelectedContact)] = (Employee)contactControl.Contact.Clone();
+                databaseListView.SelectedItem = ContactList[temp];
                 
             }                  
         }
