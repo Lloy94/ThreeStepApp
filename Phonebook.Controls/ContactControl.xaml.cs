@@ -24,6 +24,7 @@ namespace Phonebook.Controls
 
         private Employee contact;
 
+        public static ObservableCollection<Department> Departments { get; set; } = new ObservableCollection<Department>();
         public Employee Contact
         {
             get { return contact; }
@@ -33,7 +34,7 @@ namespace Phonebook.Controls
                 NotifyPropertyChanged();
             }
         }
-        public ObservableCollection<Department> Departments { get; set; }= Department.Departments;
+      
         public ContactControl()
         {         
             InitializeComponent();
@@ -54,8 +55,7 @@ namespace Phonebook.Controls
             }
         }
 
-
-        
+     
 
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -28,7 +28,7 @@
             </TextBox.Style>
         </TextBox>
         <Label x:Name="label1_Copy" Content="Номер телефона:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ComboBox ItemsSource="{Binding Departments}"  DisplayMemberPath="DepartmentName" Text="{Binding Contact.Category.DepartmentName}" x:Name="cbCatagory"  Margin="120,41,0,0" VerticalAlignment="Top" TabIndex="1" />
+        <ComboBox ItemsSource="{Binding Departments}" SelectedItem="{Binding Contact.Category}" DisplayMemberPath="DepartmentName" Text="{Binding Contact.Category.DepartmentName}" x:Name="cbCatagory"  Margin="120,41,0,0" VerticalAlignment="Top" TabIndex="1" />
         <TextBox Text="{Binding Contact.Comment}" x:Name="tbComment" Margin="0,210,0,0" TextWrapping="Wrap" TabIndex="6" Height="90" VerticalAlignment="Top"/>
         <Label x:Name="label5" Content="Департамент" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
     </Grid>

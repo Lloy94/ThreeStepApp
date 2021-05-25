@@ -24,14 +24,17 @@ namespace Phonebook
     {
         private DatabaseDatabase database = new DatabaseDatabase();
 
-        public ObservableCollection<Employee> ContactList { get; set; }
+        public static ObservableCollection<Employee> ContactList { get; set; }
+
 
         public Employee SelectedContact { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = this;
             ContactList = database.Contacts;
+            
         }
 
         private void databaseListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -39,7 +42,8 @@ namespace Phonebook
             if (e.AddedItems.Count != 0)
             {
                 contactControl.Contact = (Employee)SelectedContact.Clone();
-                contactControl.Contact.Category = (Department)SelectedContact.Category.Clone();               
+                contactControl.Contact.Category = (Department)SelectedContact.Category.Clone();
+                
             }
         }
 
@@ -48,10 +52,10 @@ namespace Phonebook
             if (databaseListView.SelectedItems.Count < 1)
                 return;
             if (database.Update(contactControl.Contact) > 0)
-            {
-                ContactList[ContactList.IndexOf(SelectedContact)].Category = contactControl.Contact.Category;
-                ContactList[ContactList.IndexOf(SelectedContact)] = contactControl.Contact;
-            }
+            {                
+                ContactList[ContactList.IndexOf(SelectedContact)] = (Employee)contactControl.Contact.Clone();
+                
+            }                  
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -61,12 +65,18 @@ namespace Phonebook
             {
                 if (database.Add(editor.Contact) > 0)
                     MessageBox.Show("Запись успешно добавлена", "Добавление записи", MessageBoxButton.OK, MessageBoxImage.Information);
+                else MessageBox.Show("Сотрудник с таким номером уже есть", "Добавление записи не удалось", MessageBoxButton.OK);
             }
         }
 
+        private void btnAdd_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 window = new Window1();
+         window.Show();
+                 
+        }
 
-
-        private void btnRemove_Click(object sender, RoutedEventArgs e)
+            private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             if (databaseListView.SelectedItems.Count < 1)
                 return;

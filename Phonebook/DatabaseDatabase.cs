@@ -1,4 +1,5 @@
 ﻿using Phonebook.Data;
+using Phonebook.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,18 +14,13 @@ namespace Phonebook
         public const string
             ConnectionString = @"Data Source=DESKTOP-E646LMM\SQLEXPRESS;Initial Catalog=Employees;User ID=Employeeroot;Password=19052015";
 
-        private static string[] PHONE_PREFIX = { "906", "495", "499" }; // Префексы телефонных номеров
-
-        private Random random = new Random();
         public ObservableCollection<Employee> Contacts { get; set; }
+
+        public static ObservableCollection<Department> Departments { get; set; } = ContactControl.Departments;
+
 
         public DatabaseDatabase()
         {
-            Department.Departments.Add(new Department(0, "IT"));
-            Department.Departments.Add(new Department(1, "Склад"));
-            Department.Departments.Add(new Department(2, "Охрана"));
-            Department.Departments.Add(new Department(3, "Бухгалтерия"));
-            Department.Departments.Add(new Department(4, "Управление"));
             Contacts = new ObservableCollection<Employee>();
             LoadFromDatabase();
         }
@@ -40,16 +36,37 @@ namespace Phonebook
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
+                int res = 0;
                 connection.Open();
                 string exp = $@"INSERT INTO Employees (Phone, SecondName, FirstName, LastName, Comment, DepartmentId)
                                 VALUES ('{employee.Phone}','{employee.SecondName}',
                              '{employee.FirstName}','{employee.LastName}','{employee.Comment}', {employee.Category.Id})";
+                foreach (var employe in Contacts)
+                    if (employe.Phone == employee.Phone)
+                        return res;
+                SqlCommand command = new SqlCommand(exp, connection);
+                 res = command.ExecuteNonQuery();               
+                if (res > 0)
+                {
+                    Contacts.Add(employee);
+                }
+                return res;
+            }
+        }
+
+        public static int DepatmentAdd(Department department)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                string exp = $@"INSERT INTO Departments (DepartmentId, DepartmentName)
+                                VALUES ('{department.Id}', '{department.DepartmentName}' )";
 
                 SqlCommand command = new SqlCommand(exp, connection);
                 int res = command.ExecuteNonQuery();
                 if (res > 0)
                 {
-                    Contacts.Add(employee);
+                    Departments.Add(department);
                 }
                 return res;
             }
@@ -85,14 +102,59 @@ namespace Phonebook
                 return res;
             }
         }
-
-        private void LoadFromDatabase()
+        public static int DepartmenRemove(Department deparment)
         {
-            string sqlExpression = "SELECT * FROM Employees";
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(sqlExpression, connection);
+
+                string sqlExpression = $@"DELETE FROM Employees WHERE DepartmentId = '{deparment.Id}'; DELETE FROM Departments WHERE DepartmentId = '{deparment.Id}'";
+                var command = new SqlCommand(sqlExpression, connection);
+                var res = command.ExecuteNonQuery();
+                if (res > 0)
+                {
+                    for (int i = MainWindow.ContactList.Count-1; i >= 0 ; i--)
+                    {
+                        if (MainWindow.ContactList[i].Category.Id == deparment.Id)
+                            MainWindow.ContactList.Remove(MainWindow.ContactList[i]);
+                        continue;
+                    }
+                    Departments.Remove(deparment);
+                   
+                }
+                return res;
+            }
+        }
+
+        private void LoadFromDatabase()
+        {
+            string sqlExpression1 = "SELECT * FROM Departments";
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression1, connection);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            var department = new Department()
+                            {
+                                Id = (int)reader["DepartmentId"],
+                                DepartmentName = reader["DepartmentName"].ToString(),
+                               
+                            };
+                           Departments.Add(department);
+                        }
+                    }
+                }
+            }
+            string sqlExpression2 = "SELECT * FROM Employees";
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression2, connection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.HasRows)
@@ -106,7 +168,7 @@ namespace Phonebook
                                 FirstName = reader.GetString(2),
                                 LastName = reader["LastName"].ToString(),
                                 Comment = reader["Comment"].ToString(),
-                                Category = Department.Departments[(int)reader["DepartmentId"]]
+                                Category = Departments[(int)reader["DepartmentId"]]
                             };
                             Contacts.Add(employee);
                         }

@@ -21,7 +21,6 @@ namespace Phonebook.Data
         private int id;
         private string departmentName;
 
-        public static ObservableCollection<Department> Departments { get; set; } = new ObservableCollection<Department>();
        
         public string DepartmentName {
             get { return departmentName; }
