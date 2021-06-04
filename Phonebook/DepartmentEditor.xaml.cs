@@ -12,24 +12,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Database.Communication.DatabaseService;
 using Phonebook.Controls;
-using Phonebook.Data;
 
 namespace Phonebook
 {
     /// <summary>
     /// Логика взаимодействия для Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class DepartmentEditor : Window
     {
+        DatabaseServiceSoapClient databaseServiceSoapClient = new DatabaseServiceSoapClient();
         public static ObservableCollection<Department> DepartmentList { get; set; }
 
         public Department SelectedDepartment { get; set; }
-        public Window1()
+        public DepartmentEditor()
         {          
             InitializeComponent();
             this.DataContext = this;
-            DepartmentList =DatabaseDatabase.Departments;           
+            DepartmentList = DatabaseDatabase.Departments;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -44,7 +45,7 @@ namespace Phonebook
 
             if (MessageBox.Show("Вы действительно желаете удалить Департамент?", "Удаление департамента", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                if (DatabaseDatabase.DepartmenRemove((Department)deparmentView.SelectedItems[0]) > 0) { 
+                if (DepartmenRemove((Department)deparmentView.SelectedItems[0]) > 0) { 
                     MessageBox.Show("Запись успешно удалена", "Удаление записи", MessageBoxButton.OK, MessageBoxImage.Information);                 
                 }
             }
@@ -58,8 +59,35 @@ namespace Phonebook
                 DepartmentName = textBox.Text
             };
 
-            if (DatabaseDatabase.DepatmentAdd(department) > 0)
+            if (DepatmentAdd(department) > 0)
                 MessageBox.Show("Запись успешно добавлена", "Добавление записи", MessageBoxButton.OK, MessageBoxImage.Information);
+
+        }
+        public int DepartmenRemove(Department deparment)
+        {
+            var res = databaseServiceSoapClient.DepartmenRemove(deparment);
+            if (res > 0)
+            {
+                for (int i = MainWindow.ContactList.Count - 1; i >= 0; i--)
+                {
+                    if (MainWindow.ContactList[i].Category.Id == deparment.Id)
+                        MainWindow.ContactList.Remove(MainWindow.ContactList[i]);
+                    continue;
+                }
+                DepartmentList.Remove(deparment);
+
+            }
+            return res;
+        }
+        public int DepatmentAdd(Department department)
+        {
+            var res = databaseServiceSoapClient.DepatmentAdd(department);
+
+            if (res > 0)
+            {
+                DepartmentList.Add(department);
+            }
+            return res;
 
         }
     }

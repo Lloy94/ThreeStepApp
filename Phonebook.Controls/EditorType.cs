@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phonebook.Data
+namespace Phonebook.Controls
 {
     public enum EditorType
     {

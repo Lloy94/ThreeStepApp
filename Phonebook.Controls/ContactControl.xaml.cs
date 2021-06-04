@@ -1,5 +1,4 @@
-﻿using Phonebook.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -16,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Database.Communication.DatabaseService;
+
 namespace Phonebook.Controls
 {
     public partial class ContactControl : UserControl, INotifyPropertyChanged
@@ -24,7 +25,7 @@ namespace Phonebook.Controls
 
         private Employee contact;
 
-        public static ObservableCollection<Department> Departments { get; set; } = new ObservableCollection<Department>();
+        public  static ObservableCollection<Department> Departments { get; set; } = new ObservableCollection<Department>();
         public Employee Contact
         {
             get { return contact; }

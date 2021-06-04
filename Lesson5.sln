@@ -9,6 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Controls", "Phoneb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Data", "Phonebook.Data\Database.Data.csproj", "{2D2F2955-A410-47BE-84C0-BA08A600133A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseWebService", "DatabaseWebService\DatabaseWebService.csproj", "{E18FF7FF-0363-4A5F-8CBB-9F171D836ABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.Communication", "Database.Communication\Database.Communication.csproj", "{574CB97E-0E7E-4A42-BA4F-686FF5B653D9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E18FF7FF-0363-4A5F-8CBB-9F171D836ABE} = {E18FF7FF-0363-4A5F-8CBB-9F171D836ABE}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +34,14 @@ Global
 		{2D2F2955-A410-47BE-84C0-BA08A600133A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D2F2955-A410-47BE-84C0-BA08A600133A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D2F2955-A410-47BE-84C0-BA08A600133A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18FF7FF-0363-4A5F-8CBB-9F171D836ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18FF7FF-0363-4A5F-8CBB-9F171D836ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18FF7FF-0363-4A5F-8CBB-9F171D836ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18FF7FF-0363-4A5F-8CBB-9F171D836ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{574CB97E-0E7E-4A42-BA4F-686FF5B653D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{574CB97E-0E7E-4A42-BA4F-686FF5B653D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{574CB97E-0E7E-4A42-BA4F-686FF5B653D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{574CB97E-0E7E-4A42-BA4F-686FF5B653D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

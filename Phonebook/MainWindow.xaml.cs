@@ -1,5 +1,4 @@
-﻿using Phonebook.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Database.Communication.DatabaseService;
 
 namespace Phonebook
 {
@@ -73,7 +73,7 @@ namespace Phonebook
 
         private void btnAdd_Copy_Click(object sender, RoutedEventArgs e)
         {
-            Window1 window = new Window1();
+            DepartmentEditor window = new DepartmentEditor();
          window.Show();
                  
         }
