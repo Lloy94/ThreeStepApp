@@ -24,14 +24,17 @@ namespace Phonebook
     {
         private DatabaseDatabase database = new DatabaseDatabase();
 
-        public ObservableCollection<Employee> ContactList { get; set; }
+        public static ObservableCollection<Employee> ContactList { get; set; }
+
 
         public Employee SelectedContact { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = this;
             ContactList = database.Contacts;
+            
         }
 
         private void databaseListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -39,6 +42,8 @@ namespace Phonebook
             if (e.AddedItems.Count != 0)
             {
                 contactControl.Contact = (Employee)SelectedContact.Clone();
+                contactControl.Contact.Category = (Department)SelectedContact.Category.Clone();
+                
             }
         }
 
@@ -46,8 +51,13 @@ namespace Phonebook
         {
             if (databaseListView.SelectedItems.Count < 1)
                 return;
-
-            ContactList[ContactList.IndexOf(SelectedContact)] = contactControl.Contact;
+            if (database.Update(contactControl.Contact) > 0)
+            {
+                int temp = ContactList.IndexOf(SelectedContact);
+                ContactList[ContactList.IndexOf(SelectedContact)] = (Employee)contactControl.Contact.Clone();
+                databaseListView.SelectedItem = ContactList[temp];
+                
+            }                  
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -55,20 +65,28 @@ namespace Phonebook
             ContactEditor editor = new ContactEditor();
             if (editor.ShowDialog() == true)
             {
-                database.Contacts.Add(editor.Contact);
+                if (database.Add(editor.Contact) > 0)
+                    MessageBox.Show("Запись успешно добавлена", "Добавление записи", MessageBoxButton.OK, MessageBoxImage.Information);
+                else MessageBox.Show("Сотрудник с таким номером уже есть", "Добавление записи не удалось", MessageBoxButton.OK);
             }
         }
 
+        private void btnAdd_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 window = new Window1();
+         window.Show();
+                 
+        }
 
-
-        private void btnRemove_Click(object sender, RoutedEventArgs e)
+            private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             if (databaseListView.SelectedItems.Count < 1)
                 return;
 
             if (MessageBox.Show("Вы действительно желаете удалить Сотрудника?", "Удаление сотрудника", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                database.Contacts.Remove((Employee)databaseListView.SelectedItems[0]);
+                if (database.Remove((Employee)databaseListView.SelectedItems[0]) > 0)
+                    MessageBox.Show("Запись успешно удалена", "Удаление записи", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

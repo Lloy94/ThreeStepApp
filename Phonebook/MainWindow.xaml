@@ -35,6 +35,7 @@
         <Button x:Name="btnApply" Content="Применить" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="80" Margin="0,326,10,0" Click="btnApply_Click" Height="24"/>
         <Button x:Name="btnAdd" Content="Добавить" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="80" Margin="0,326,403,0" Height="24" Click="btnAdd_Click" />
         <Button x:Name="btnRemove" Content="Удалить" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="80" Margin="0,326,318,0" Height="24" Click="btnRemove_Click" />
+        <Button x:Name="btnAdd_Copy" Content="Работа с департаментами " HorizontalAlignment="Right"  VerticalAlignment="Top" Width="163" Margin="0,326,123,0" Height="24" Click="btnAdd_Copy_Click" />
 
     </Grid>
 </Window>
